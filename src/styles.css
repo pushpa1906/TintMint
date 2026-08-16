@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  /* Surfaces */
+  --color-canvas: #fcfcfa;
+  --color-canvas-dark: #181817;
+  --color-surface: #f5f5f2;
+  --color-surface-dark: #20201f;
+  --color-panel: #ffffff;
+  --color-panel-dark: #20201f;
+
+  /* Text */
+  --color-ink: #222222;
+  --color-ink-dark: #f3f3ef;
+  --color-muted: #67675f;
+  --color-muted-dark: #b3b3ad;
+
+  /* Lines */
+  --color-line: #e3e3de;
+  --color-line-dark: #34342f;
+  --color-line-strong: #afafaa;
+  --color-line-strong-dark: #565651;
+  --color-field: #cfcfca;
+  --color-field-dark: #4b4b47;
+
+  /* Brand accent */
+  --color-accent: #08b8b2;
+  --color-accent-dark: #1fd0ca;
+}
+
+html {
+  background: var(--color-canvas);
+}
+
+html.dark {
+  background: var(--color-canvas-dark);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+input[type="color"] {
+  padding: 0;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

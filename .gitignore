@@ -1,0 +1,23 @@
+node_modules/
+dist/
+dist-ssr/
+
+.env
+.env.*
+# except .env.example if you create one
+
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+.vite/
+*.tsbuildinfo
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
+
+*.log
