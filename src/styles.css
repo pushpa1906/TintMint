@@ -71,9 +71,22 @@ body {
   min-width: 320px;
   background: var(--color-canvas);
   color: var(--color-ink);
+
+  /* Same font stack Reparo uses */
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
+
   -webkit-font-smoothing: antialiased;
+}
+
+/* Keep controls on the exact same Reparo font */
+button,
+input,
+select,
+textarea {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font: inherit;
 }
 
 /* Dark-mode body colors */
@@ -85,14 +98,6 @@ html.dark body {
 /* Include borders and padding within element dimensions */
 * {
   box-sizing: border-box;
-}
-
-/* Make form controls use the website font */
-button,
-input,
-select,
-textarea {
-  font: inherit;
 }
 
 /* Remove tap flash on mobile devices */
