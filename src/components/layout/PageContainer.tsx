@@ -6,7 +6,8 @@ interface PageContainerProps extends HTMLAttributes<HTMLDivElement> {
   padY?: string;
 }
 
-const HORIZONTAL_PADDING = "mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-10";
+const HORIZONTAL_PADDING =
+  "mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-10 xl:px-12";
 
 /**
  * The single source of truth for the application's horizontal page padding
@@ -16,7 +17,7 @@ const HORIZONTAL_PADDING = "mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 x
 export default function PageContainer({
   children,
   className = "",
-  padY = "py-6 md:py-8 lg:py-10",
+  padY = "py-6 md:py-7 lg:py-8",
   ...rest
 }: PageContainerProps) {
   return (
