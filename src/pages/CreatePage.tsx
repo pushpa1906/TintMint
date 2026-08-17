@@ -18,33 +18,43 @@ export default function CreatePage({ onNext }: { onNext: () => void }) {
   const selected = p.colors[p.selectedIndex];
 
   const randomColor = () => {
-    const next = `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, "0").toUpperCase()}`;
+    const next = `#${Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padStart(6, "0")
+      .toUpperCase()}`;
     p.setBaseColor(next);
   };
 
   return (
     <main>
       <PageContainer>
-        <PageHeader
-          title="Create a palette"
-          description="Start with one color. Choose a relationship and a theme, then generate a palette you can adjust."
-        />
-
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_570px] xl:grid-cols-[minmax(0,1fr)_600px]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px]">
           <div className="max-w-180">
+            <PageHeader
+              title="Create a palette"
+              description="Start with one color. Choose a relationship and a theme, then generate a palette you can adjust."
+            />
+
             <section className="py-5">
-              <h2 className="text-lg font-semibold text-ink dark:text-ink-dark">Start color</h2>
+              <h2 className="text-lg font-semibold text-ink dark:text-ink-dark">
+                Start color
+              </h2>
               <p className="mt-1.5 text-[15px] leading-relaxed text-muted dark:text-muted-dark">
                 Pick a color or enter a HEX value.
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-4">
                 <ColorPicker value={p.baseColor} onChange={p.setBaseColor} />
-                <Button variant="ghost" onClick={randomColor}>Random</Button>
+                <Button variant="ghost" onClick={randomColor}>
+                  Random
+                </Button>
               </div>
             </section>
 
             <section className="border-t border-line py-5 dark:border-line-dark">
-              <RelationshipSelector value={p.relationship} onChange={p.setRelationship} />
+              <RelationshipSelector
+                value={p.relationship}
+                onChange={p.setRelationship}
+              />
             </section>
 
             <section className="border-t border-line py-5 dark:border-line-dark">
@@ -55,12 +65,16 @@ export default function CreatePage({ onNext }: { onNext: () => void }) {
               <p className="text-sm text-muted dark:text-muted-dark">
                 {p.relationship} · {p.theme}
               </p>
-              <Button variant="primary" onClick={p.generate}>Generate palette</Button>
             </div>
           </div>
 
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <RelationshipPreview baseColor={p.baseColor} relationship={p.relationship} theme={p.theme} />
+            <RelationshipPreview
+              baseColor={p.baseColor}
+              relationship={p.relationship}
+              theme={p.theme}
+              onGenerate={p.generate}
+            />
           </aside>
         </div>
 
@@ -87,8 +101,12 @@ export default function CreatePage({ onNext }: { onNext: () => void }) {
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 py-4">
             <AddColor onAdd={p.addColor} disabled={p.colors.length >= 8} />
-            <Button variant="ghost" size="sm" onClick={p.reorderLightToDark}>Reorder light → dark</Button>
-            <Button variant="ghost" size="sm" onClick={p.generate}>Regenerate</Button>
+            <Button variant="ghost" size="sm" onClick={p.reorderLightToDark}>
+              Reorder light → dark
+            </Button>
+            <Button variant="ghost" size="sm" onClick={p.generate}>
+              Regenerate
+            </Button>
           </div>
         </section>
 
@@ -106,8 +124,12 @@ export default function CreatePage({ onNext }: { onNext: () => void }) {
         )}
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5 dark:border-line-dark">
-          <p className="text-[15px] text-muted dark:text-muted-dark">Next: mix two colors from your palette.</p>
-          <Button variant="ghost" onClick={onNext}>Go to Mix →</Button>
+          <p className="text-[15px] text-muted dark:text-muted-dark">
+            Next: mix two colors from your palette.
+          </p>
+          <Button variant="ghost" onClick={onNext}>
+            Go to Mix →
+          </Button>
         </div>
       </PageContainer>
     </main>

@@ -16,7 +16,7 @@ export default function SectionHeader({ title, description, as = "h2", action }:
   const Heading = as;
   const headingClass =
     as === "h2"
-      ? "text-xl font-semibold tracking-tight text-ink dark:text-ink-dark md:text-[22px]"
+      ? "text-[21px] font-semibold leading-[1.3] tracking-[-0.025em] text-ink dark:text-ink-dark md:text-[25px]"
       : "text-lg font-semibold text-ink dark:text-ink-dark";
 
   return (

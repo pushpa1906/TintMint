@@ -1,7 +1,5 @@
 import PageContainer from "../layout/PageContainer";
 import ThemeToggle from "./ThemeToggle";
-import tintmintLogo from "../../assets/tintmint-logo.svg";
-import { FlaskConical, Palette } from "lucide-react";
 
 export type Page = "create" | "mix" | "preview" | "saved" | "export";
 
@@ -36,8 +34,11 @@ export default function Navbar({
             aria-label="TintMint home"
             className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas dark:focus-visible:ring-offset-canvas-dark"
           >
-            <Palette className="h-6 w-6 text-accent" aria-hidden="true" strokeWidth={2.25} />
-            <span className="text-2xl font-extrabold tracking-tight">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-accent text-sm font-extrabold tracking-tight text-white shadow-sm dark:bg-accent-dark dark:text-canvas-dark">
+              TM
+            </span>
+
+            <span className="text-xl font-bold tracking-[-0.02em]">
               <span className="text-ink dark:text-ink-dark">Tint</span>
               <span className="text-accent dark:text-accent-dark">Mint</span>
             </span>

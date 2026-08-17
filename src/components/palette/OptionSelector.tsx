@@ -11,11 +11,6 @@ interface OptionSelectorProps<T extends string> {
   onChange: (value: T) => void;
 }
 
-/**
- * Generic labeled option picker with an inline explanation of the selected
- * choice. Powers both the Relationship and Theme selectors on the Create
- * page — they differ only in their data, not their behavior.
- */
 export default function OptionSelector<T extends string>({
   legend,
   description,
@@ -23,36 +18,77 @@ export default function OptionSelector<T extends string>({
   value,
   onChange,
 }: OptionSelectorProps<T>) {
-  const selected = options.find((option) => option.name === value) ?? options[0];
-
   return (
     <fieldset className="border-0 p-0">
-      <legend className="text-lg font-semibold text-ink dark:text-ink-dark">{legend}</legend>
-      <p className="mt-1.5 text-[15px] leading-relaxed text-muted dark:text-muted-dark">{description}</p>
+      <legend className="text-lg font-semibold text-ink dark:text-ink-dark">
+        {legend}
+      </legend>
+      <p className="mt-1.5 text-[15px] leading-relaxed text-muted dark:text-muted-dark">
+        {description}
+      </p>
 
-      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-        {options.map((option) => (
-          <button
-            type="button"
-            key={option.name}
-            aria-pressed={value === option.name}
-            onClick={() => onChange(option.name)}
-            className={[
-              "rounded-t-sm border-b-2 pb-1 text-base font-medium transition-colors",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-              value === option.name
-                ? "border-ink text-ink dark:border-ink-dark dark:text-ink-dark"
-                : "border-transparent text-muted hover:border-line-strong hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark",
-            ].join(" ")}
-          >
-            {option.name}
-          </button>
-        ))}
-      </div>
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {options.map((option) => {
+          const isSelected = value === option.name;
 
-      <div className="mt-4 max-w-2xl border-l-2 border-line-strong pl-4 dark:border-line-strong-dark" aria-live="polite">
-        <p className="text-base font-semibold text-ink dark:text-ink-dark">{selected.name}</p>
-        <p className="mt-1 text-[15px] leading-relaxed text-muted dark:text-muted-dark">{selected.meaning}</p>
+          return (
+            <button
+              type="button"
+              key={option.name}
+              aria-pressed={isSelected}
+              onClick={() => onChange(option.name)}
+              className={[
+                /* Compact outlined card */
+                "min-h-12 rounded-lg border px-4 py-3",
+                "text-center text-[15px] font-semibold",
+
+                /* Smooth interaction */
+                "transition-[transform,border-color,background-color,box-shadow,color]",
+                "duration-200 ease-out",
+
+                /* Keyboard focus */
+                "focus-visible:outline-none",
+                "focus-visible:ring-[3px]",
+                "focus-visible:ring-focus",
+                "focus-visible:ring-offset-2",
+                "focus-visible:ring-offset-canvas",
+                "dark:focus-visible:ring-focus-dark",
+                "dark:focus-visible:ring-offset-canvas-dark",
+
+                /* Selected card */
+                isSelected
+                  ? [
+                      "border-accent bg-[#e7f3f3] text-ink",
+                      "shadow-[0_1px_4px_rgba(21,111,120,0.12)]",
+                      "dark:border-accent-dark dark:bg-[#193539] dark:text-ink-dark",
+                      "dark:shadow-none",
+                    ].join(" ")
+                  : [
+                      "border-line bg-panel text-muted",
+                      "enabled:hover:-translate-y-px",
+                      "enabled:hover:border-line-strong",
+                      "enabled:hover:bg-surface",
+                      "enabled:hover:text-ink",
+
+                      "dark:border-line-dark dark:bg-panel-dark dark:text-muted-dark",
+                      "dark:enabled:hover:border-line-strong-dark",
+                      "dark:enabled:hover:bg-surface-dark",
+                      "dark:enabled:hover:text-ink-dark",
+                    ].join(" "),
+
+                /* Pressed state */
+                "enabled:active:translate-y-0",
+                "enabled:active:scale-[0.98]",
+
+                /* Respect reduced-motion preference */
+                "motion-reduce:transform-none",
+                "motion-reduce:transition-none",
+              ].join(" ")}
+            >
+              {option.name}
+            </button>
+          );
+        })}
       </div>
     </fieldset>
   );

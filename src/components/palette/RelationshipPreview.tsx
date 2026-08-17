@@ -3,6 +3,7 @@ import { Sparkles } from "lucide-react";
 import type { PaletteTheme, Relationship } from "../../types/palette";
 import { relationshipOptions, themeOptions } from "../../data/paletteOptions";
 import { generatePalette } from "../../utils/color";
+import Button from "../common/Button";
 import Card from "../common/Card";
 import ColorSwatch from "./ColorSwatch";
 import ColorWheel from "./ColorWheel";
@@ -11,19 +12,15 @@ interface RelationshipPreviewProps {
   baseColor: string;
   relationship: Relationship;
   theme: PaletteTheme;
+  onGenerate: () => void;
   previewCount?: number;
 }
 
-/**
- * Live sidebar preview for the Create page. Shows a color-wheel "picture" of
- * the current relationship plus the resulting swatches and explanation text,
- * updating instantly as the person changes the starting color, relationship
- * or theme — no need to click Generate first.
- */
 export default function RelationshipPreview({
   baseColor,
   relationship,
   theme,
+  onGenerate,
   previewCount = 5,
 }: RelationshipPreviewProps) {
   const previewColors = useMemo(
@@ -35,9 +32,9 @@ export default function RelationshipPreview({
   const themeInfo = themeOptions.find((option) => option.name === theme) ?? themeOptions[0];
 
   return (
-    <Card padding="lg" className="flex flex-col items-center gap-6 text-center">
+    <Card padding="lg" className="flex flex-col items-center gap-5 pt-3! text-center">
       <div className="flex items-center gap-2 text-muted dark:text-muted-dark">
-        <Sparkles className="h-4 w-4 color-yellow" aria-hidden="true" />
+        <Sparkles className="h-4 w-4 text-amber-500" aria-hidden="true" />
         <p className="text-sm font-semibold uppercase tracking-wide">Live preview</p>
       </div>
 
@@ -58,6 +55,12 @@ export default function RelationshipPreview({
           <p className="text-base font-semibold text-ink dark:text-ink-dark">{themeInfo.name} theme</p>
           <p className="mt-1 text-sm leading-relaxed text-muted dark:text-muted-dark">{themeInfo.meaning}</p>
         </div>
+      </div>
+
+      <div className="w-full border-t border-line pt-4 dark:border-line-dark">
+        <Button size="lg" className="primary-button" type="button" onClick={onGenerate}>
+          Generate palette
+        </Button>
       </div>
     </Card>
   );

@@ -1,56 +1,93 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
-
+/* Enable class-based dark mode using the .dark class */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  /* Main website font */
+  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
-  /* Surfaces */
-  --color-canvas: #fcfcfa;
-  --color-canvas-dark: #181817;
-  --color-surface: #f5f5f2;
-  --color-surface-dark: #20201f;
+  /* Main page backgrounds */
+  --color-canvas: #f7f8fa;
+  --color-canvas-dark: #12171c;
+
+  /* Section and secondary backgrounds */
+  --color-surface: #f1f4f8;
+  --color-surface-dark: #202831;
+
+  /* Cards, panels, menus and input backgrounds */
   --color-panel: #ffffff;
-  --color-panel-dark: #20201f;
+  --color-panel-dark: #181f26;
 
-  /* Text */
-  --color-ink: #222222;
-  --color-ink-dark: #f3f3ef;
-  --color-muted: #67675f;
-  --color-muted-dark: #b3b3ad;
+  /* Headings and primary text */
+  --color-ink: #1d2530;
+  --color-ink-dark: #f1f5f7;
 
-  /* Lines */
-  --color-line: #e3e3de;
-  --color-line-dark: #34342f;
-  --color-line-strong: #afafaa;
-  --color-line-strong-dark: #565651;
-  --color-field: #cfcfca;
-  --color-field-dark: #4b4b47;
+  /* Descriptions, labels and secondary text */
+  --color-muted: #5f6b78;
+  --color-muted-dark: #b1bbc5;
 
-  /* Brand accent */
-  --color-accent: #08b8b2;
-  --color-accent-dark: #1fd0ca;
+  /* Subtle borders and dividers */
+  --color-line: #dce2e8;
+  --color-line-dark: #2d3741;
+
+  /* Strong borders used for ghost buttons and emphasized dividers */
+  --color-line-strong: #c7d0da;
+  --color-line-strong-dark: #41505d;
+
+  /* Form field and input borders */
+  --color-field: #c7d0da;
+  --color-field-dark: #41505d;
+
+  /* Accessible primary teal for buttons, links and active controls */
+  --color-accent: #156f78;
+  --color-accent-hover: #0e5961;
+  --color-accent-active: #094a51;
+
+  /* Brighter teal for dark mode */
+  --color-accent-dark: #6fc4c5;
+  --color-accent-dark-hover: #9ad8d8;
+  --color-accent-dark-active: #58abad;
+
+  /* Accessible keyboard-focus indicators */
+  --color-focus: #0e5961;
+  --color-focus-dark: #9ad8d8;
 }
 
+/* Light-mode page background */
 html {
   background: var(--color-canvas);
+  scroll-behavior: smooth;
 }
 
+/* Dark-mode page background */
 html.dark {
   background: var(--color-canvas-dark);
 }
 
+/* Default website typography */
 body {
   margin: 0;
   min-width: 320px;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* Dark-mode body colors */
+html.dark body {
+  background: var(--color-canvas-dark);
+  color: var(--color-ink-dark);
+}
+
+/* Include borders and padding within element dimensions */
 * {
   box-sizing: border-box;
 }
 
+/* Make form controls use the website font */
 button,
 input,
 select,
@@ -58,14 +95,30 @@ textarea {
   font: inherit;
 }
 
+/* Remove tap flash on mobile devices */
+button,
+input,
+select,
+textarea,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove unnecessary spacing from color-picker inputs */
 input[type="color"] {
   padding: 0;
 }
 
+/* Use the teal accent when the user selects text */
 ::selection {
-  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 28%,
+    transparent
+  );
 }
 
+/* Reduce animations for users who prefer less motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

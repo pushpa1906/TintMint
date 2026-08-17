@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "tsc -b && vite build",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test:e2e": "playwright test"

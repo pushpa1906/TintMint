@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-canvas font-sans text-base leading-6 text-ink dark:bg-canvas-dark dark:text-ink-dark">
+    <div className="min-h-screen bg-canvas font-sans text-base leading-[1.6] text-ink dark:bg-canvas-dark dark:text-ink-dark">
       <Navbar page={page} onNavigate={navigate} dark={dark} onToggleTheme={() => setDark(!dark)} />
       {page === "create" && <CreatePage onNext={() => navigate("mix")} />}
       {page === "mix" && <MixPage onNext={() => navigate("preview")} />}

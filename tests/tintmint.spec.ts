@@ -6,7 +6,15 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("generates a palette with relationship and theme", async ({ page }) => {
-  await page.getByRole("button", { name: "Tetradic" }).click();
+const tetradicButton = page.getByRole("button", {
+  name: "Tetradic",
+  exact: true,
+});
+
+await tetradicButton.focus();
+await page.keyboard.press("Enter");
+
+await expect(tetradicButton).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByText(/Uses two complementary color pairs/)).toBeVisible();
   await page.getByRole("button", { name: "Bold" }).click();
   await expect(page.getByText(/stronger saturation and contrast/)).toBeVisible();
@@ -23,7 +31,7 @@ test("edits and locks a color", async ({ page }) => {
 });
 
 test("mixes colors", async ({ page }) => {
-  await page.getByRole("button", { name: "Mix" }).click();
+  await page.getByRole("button", { name: "Mix", exact: true }).click();
   await page.getByLabel("How much Color B?").fill("65");
   await page.getByRole("button", { name: "+ Add to palette" }).click();
   await expect(page.getByText("Result")).toBeVisible();
